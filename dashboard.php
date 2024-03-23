@@ -18,9 +18,35 @@ $data = $db->selectdata("select * from  products p inner join categories c on p.
 
     if (isset($_GET['deleted'])) {
         if ($_GET['deleted'] == 'true') {
-            echo '<script> Swal.fire("Produit supprimé avec succès", "", "success") </script>';
+            echo '<script>
+    Swal.fire({
+        title: "Produit supprimé avec succès",
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "/"; // Redirect to home
+        }
+    });
+</script>';
+
         } else {
-            echo ' <script> Swal.fire("Erreur lors de la suppression du produit", "", "error") </script>';
+            echo '<script>
+    Swal.fire({
+        title: "Erreur lors de la suppression du produit",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "/"; // Redirect to dashboard
+        }
+    });
+</script>';
+
         }
     }
 
@@ -30,7 +56,7 @@ $data = $db->selectdata("select * from  products p inner join categories c on p.
             <div class="container-fluid px-4">
                 <div class="row align-items-center">
                 <h1 class="mt-4 col">Les Produits</h1>
-                <a href="assets/config/logout.php" class="ms-auto col text-end ">logout</a>
+                <a href="assets/config/logout.php" class="ms-auto col text-end text-decoration-none text-uppercase "><i class="fa fa-user me-2 "></i> logout</a>
                 </div>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="dashboard.php">tableau de bord</a></li>
@@ -83,7 +109,7 @@ $data = $db->selectdata("select * from  products p inner join categories c on p.
 
                                         <td>
                                             <?php if(strtolower($role) == 'admin'){ ?>
-                                                <a class="btn btn-warning" href="/assets/config/edit.php?id=<?= $value['ref_prod'] ?>">
+                                                <a class="btn btn-warning" href="/edit.php?ref=<?= $value['ref_prod'] ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -118,7 +144,8 @@ $data = $db->selectdata("select * from  products p inner join categories c on p.
                     showDenyButton: true,
                     showCancelButton: false,
                     confirmButtonText: "supprimer",
-                    denyButtonText: `Annuler`
+                    denyButtonText: `Annuler`,
+                    icon : 'question'
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
