@@ -16,7 +16,7 @@ if (isset($_POST["ref"]) && !empty($_POST["ref"])) {
         $fileSize = $_FILES['imgprod']['size'];
         $fileError = $_FILES['imgprod']['error'];
         $fileType = $_FILES['imgprod']['type'];
-        
+
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt));
         $allowedExt = array("jpg", "jpeg", "png");
@@ -26,7 +26,7 @@ if (isset($_POST["ref"]) && !empty($_POST["ref"])) {
                 if ($fileSize < 10000000) {
                     $fileNemeNew = "$ref" . "." . $fileActualExt;
                     $fileDestination = 'assets/img/' . $fileNemeNew;
-                    
+
                     if (move_uploaded_file($fileTempName, $fileDestination)) {
                         $db = new DB();
                         $query = "UPDATE products
@@ -65,33 +65,31 @@ if (isset($_POST["ref"]) && !empty($_POST["ref"])) {
                 echo "Error uploading file.";
             }
         } else {
-            echo "File type not allowed.";
-        }
-    } else {
-        $db = new DB();
-        $query = "UPDATE products
-            SET
-            nom_prod = :nom_prod,
-            prix_prod = :prix_prod,
-            qt_prod = :qt_prod,
-            desc_prod = :desc_prod,
-            id_cat = :id_cat
-            WHERE ref_prod = :ref_prod";
-        $params = array(
-            ':nom_prod' => $name,
-            ':prix_prod' => $price,
-            ':qt_prod' => $qt,
-            ':desc_prod' => $description,
-            ':id_cat' => $category,
-            ':ref_prod' => $ref
-        );
-        $res = $db->UpdatetData($query, $params);
-        if ($res > 0) {
-            header("location:dashboard.php?edit=true");
-            exit;
-        } else {
-            header("location:dashboard.php?edit=false");
-            exit;
+            $db = new DB();
+            $query = "UPDATE products
+                SET
+                nom_prod = :nom_prod,
+                prix_prod = :prix_prod,
+                qt_prod = :qt_prod,
+                desc_prod = :desc_prod,
+                id_cat = :id_cat
+                WHERE ref_prod = :ref_prod";
+            $params = array(
+                ':nom_prod' => $name,
+                ':prix_prod' => $price,
+                ':qt_prod' => $qt,
+                ':desc_prod' => $description,
+                ':id_cat' => $category,
+                ':ref_prod' => $ref
+            );
+            $res = $db->UpdatetData($query, $params);
+            if ($res > 0) {
+                header("location:dashboard.php?edit=true");
+                exit;
+            } else {
+                header("location:dashboard.php?edit=false");
+                exit;
+            }
         }
     }
 } else {

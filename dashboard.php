@@ -16,39 +16,40 @@ $data = $db->selectdata("select * from  products p inner join categories c on p.
 <body class="sb-nav-fixed">
     <?php
 
-    if (isset($_GET['deleted'])) {
-        if ($_GET['deleted'] == 'true') {
-            echo '<script>
-    Swal.fire({
-        title: "Produit supprimé avec succès",
-        icon: "success",
-        showCancelButton: false,
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "OK"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = "/"; // Redirect to home
-        }
-    });
-</script>';
+if (isset($_GET['deleted'])) {
+    $title = ($_GET['deleted'] == 'true') ? "Produit supprimé avec succès" : "Erreur lors de la suppression du produit";
+    $icon = ($_GET['deleted'] == 'true') ? "success" : "error";
+    echo '<script>
+        Swal.fire({
+            title: "' . $title . '",
+            icon: "' . $icon . '",
+            showCancelButton: false,
+            confirmButtonColor: "' . (($icon == "success") ? "#3085d6" : "#d33") . '",
+            confirmButtonText: "OK"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/";
+            }
+        });
+    </script>';
+} elseif (isset($_GET['edit'])) {
+    $title = ($_GET['edit'] == 'true') ? "Produit modifié avec succès" : "Erreur lors de la modification du produit";
+    $icon = ($_GET['edit'] == 'true') ? "success" : "error";
+    echo '<script>
+        Swal.fire({
+            title: "' . $title . '",
+            icon: "' . $icon . '",
+            showCancelButton: false,
+            confirmButtonColor: "' . (($icon == "success") ? "#3085d6" : "#d33") . '",
+            confirmButtonText: "OK"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/";
+            }
+        });
+    </script>';
+}
 
-        } else {
-            echo '<script>
-    Swal.fire({
-        title: "Erreur lors de la suppression du produit",
-        icon: "error",
-        showCancelButton: false,
-        confirmButtonColor: "#d33",
-        confirmButtonText: "OK"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = "/"; // Redirect to dashboard
-        }
-    });
-</script>';
-
-        }
-    }
 
     ?>
     <div id="layoutSidenav_content">
