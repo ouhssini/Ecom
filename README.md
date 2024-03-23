@@ -26,7 +26,7 @@ The Product Management System is a web application designed to manage product in
 ```bash
 # Clone the repository
 git clone https://github.com/ouhssini/Ecom.git
-
+```	
 
 ## Installation:
 1. Import the provided database schema (`database.sql`) into your MySQL database.
