@@ -47,7 +47,7 @@ if (isset($_POST["ref"]) && !empty($_POST["ref"])) {
                             ':id_cat' => $category,
                             ':ref_prod' => $ref
                         );
-                        $res = $db->UpdatetData($query, $params);
+                        $res = $db->UpdateData($query, $params);
                         if ($res > 0) {
                             header("location:dashboard.php?edit=true");
                             exit;

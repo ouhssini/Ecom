@@ -39,7 +39,7 @@ class DB
         }
         return $stm->rowCount();
     }
-    public function UpdatetData($query, $params = [])
+    public function UpdateData($query, $params = [])
     {
         try {
             $stm = $this->con->prepare($query);
