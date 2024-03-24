@@ -9,8 +9,9 @@ The Product Management System is a web application designed to manage product in
 3. **Detailed Product View:** View detailed information about each product, including description and image.
 4. **Edit Product:** Admin users can edit existing product details, including name, price, quantity, description, category, and image.
 5. **Delete Product:** Admin users can delete products from the system.
-6. **Error Handling:** Provides informative error messages for various scenarios, ensuring a smooth user experience.
-7. **Responsive Design:** The application is designed to be responsive, ensuring compatibility with different devices and screen sizes.
+6. **Add Product:** Admin users can add new products to the system, including uploading product images.
+7. **Error Handling:** Provides informative error messages for various scenarios, ensuring a smooth user experience.
+8. **Responsive Design:** The application is designed to be responsive, ensuring compatibility with different devices and screen sizes.
 
 ## Technologies Used:
 - PHP: Backend scripting language used for server-side logic.
