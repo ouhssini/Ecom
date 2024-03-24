@@ -16,6 +16,12 @@ if (isset($_POST["ref"]) && !empty($_POST["ref"])) {
     $category = $_POST["category"];
     $qt = $_POST["qt"];
     $file = $_FILES["imgprod"];
+    foreach($data as $key => $value){
+        if($value['ref_prod'] == $ref){
+            header("location:dashboard.php?added=false");
+            exit;
+        }
+    }
 
     // Check if file is uploaded successfully
     if ($file['error'] === UPLOAD_ERR_OK) {
@@ -78,7 +84,6 @@ if (isset($_POST["ref"]) && !empty($_POST["ref"])) {
             ':id_cat' => $category
         );
         $res = $db->Execute($query, $params);
-
         // Redirect based on insertion result
         $redirectUrl = ($res > 0) ? 'dashboard.php?added=true' : 'dashboard.php?added=false';
         header("location: $redirectUrl");
