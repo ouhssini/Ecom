@@ -9,7 +9,7 @@ if (!isset($_GET['ref']) || $_SESSION['role'] != 'admin') {
 } else {
     $ref = $_GET['ref'];
     $db = new DB();
-    $res = $db->delete("delete from products where ref_prod = :ref_prod", [':ref_prod' => $ref]);
+    $res = $db->Execute("delete from products where ref_prod = :ref_prod", [':ref_prod' => $ref]);
     if ($res > 0) {
         header("location:dashboard.php?deleted=true");
         exit();

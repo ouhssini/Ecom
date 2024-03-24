@@ -30,7 +30,7 @@ class DB
         return $data;
     }
 
-    public function delete($query,$params = []){
+    public function Execute($query,$params = []){
         try {
             $stm = $this->con->prepare($query );
             $stm->execute($params);
@@ -39,17 +39,6 @@ class DB
         }
         return $stm->rowCount();
     }
-    public function UpdateData($query, $params = [])
-    {
-        try {
-            $stm = $this->con->prepare($query);
-            $stm->execute($params);
-        } catch (PDOException $e) {
-            throw new Exception("Query execution failed: " . $e->getMessage());
-        }
-        return $stm->rowCount();
-    }
-
     public function disconnect()
     {
         $this->con = null;
